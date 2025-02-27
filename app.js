@@ -1,13 +1,14 @@
+require('dotenv').config();
 const { App } = require("@slack/bolt");
 
 // #channel-watch
 const NOTIFY_CHANNEL_ID = "C3M36JMUN";
 
 const app = new App({
-    socketMode: true,
     token: process.env.SLACK_BOT_TOKEN,
     signingSecret: process.env.SLACK_SIGNING_SECRET,
     appToken: process.env.SLACK_APP_TOKEN,
+    socketMode: true,
 });
 
 const channelCache = new Map();
