@@ -27,6 +27,12 @@ see: https://scrapbox.io/kmc/%E9%83%A8%E5%86%85%E3%81%A7%E5%8B%95%E3%81%8F%E5%8B
 
 on ringo
 
+```
+git clone git@github.com:kmc-jp/emoji-watcher.git
+cd emoji-watcher
+npm i
+```
+
 `~/.config/systemd/user/channel-watcher.service`
 ```
  [Unit]
