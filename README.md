@@ -33,21 +33,22 @@ cd emoji-watcher
 npm i
 ```
 
-`~/.config/systemd/user/channel-watcher.service`
+`/etc/systemd/system/channel-watcher.service`
 ```
- [Unit]
- Description=channle watcher
+[Unit]
+Description=channle watcher
 
- [Service]
- EnvironmentFile=/home/segre/channel-watcher/.env
- ExecStart=node /home/segre/channel-watcher/app.js
+[Service]
+EnvironmentFile=/home/segre/channel-watcher/.env
+ExecStart=node /home/segre/channel-watcher/app.js
+Restart=always
+RestartSec=3
 
- [Install]
- WantedBy=default.target
+[Install]
+WantedBy=default.target
 ```
 ```
-systemctl --user daemon-reload
-loginctl enable-linger $USER
-systemctl --user enable --now channel-watcher.service
-systemctl --user status channel-watcher.service
+systemctl daemon-reload
+systemctl enable --now channel-watcher.service
+systemctl status channel-watcher.service
 ```
