@@ -48,7 +48,7 @@ RestartSec=3
 WantedBy=default.target
 ```
 ```
-systemctl daemon-reload
-systemctl enable --now channel-watcher.service
-systemctl status channel-watcher.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now channel-watcher.service
+sudo systemctl status channel-watcher.service
 ```
