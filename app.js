@@ -2,7 +2,7 @@ require('dotenv').config();
 const { App } = require("@slack/bolt");
 
 // #channel-watch
-const NOTIFY_CHANNEL_ID = "C3M36JMUN";
+const NOTIFY_CHANNEL_ID = process.env.SLACK_NOTIFY_CHANNEL_ID;
 
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
