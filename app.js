@@ -1,8 +1,19 @@
 require('dotenv').config();
 const { App } = require("@slack/bolt");
 
+process.on('uncaughtException', (error) => {
+    console.error('UNCAUGHT EXCEPTION:', error);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('UNHANDLED REJECTION at:', promise, 'reason:', reason);
+    process.exit(1);
+});
+
+
 // #channel-watch
-const NOTIFY_CHANNEL_ID = process.env.SLACK_NOTIFY_CHANNEL_ID;
+const NOTIFY_CHANNEL_ID = "C3M36JMUN";
 
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
@@ -10,6 +21,12 @@ const app = new App({
     appToken: process.env.SLACK_APP_TOKEN,
     socketMode: true,
 });
+
+app.receiver.client.on('error', (error) => {
+    console.error('SOCKET MODE CLIENT ERROR:', error);
+    process.exit(1);
+});
+
 
 const channelCache = new Map();
 
@@ -39,6 +56,7 @@ const postNotification = async (
     oldName = null
 ) => {
     try {
+        let messageText;
         if (isDeleted) {
             messageText = `${emoji} ${action}: #${chname}`;
         } else if (oldName) {
